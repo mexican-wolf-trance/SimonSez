@@ -8,4 +8,10 @@
     <string name="medium">MEDIUM</string>
     <string name="easy">EASY</string>
     <string name="back">Back to Menu</string>
+    <string name="start">START</string>
+    <string name="red">RED</string>
+    <string name="green">GREEN</string>
+    <string name="blue">BLUE</string>
+    <string name="yellow">YELLOW</string>
+
 </resources>
