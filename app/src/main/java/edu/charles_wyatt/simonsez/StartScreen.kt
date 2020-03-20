@@ -3,6 +3,7 @@ package edu.charles_wyatt.simonsez
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -23,8 +24,10 @@ class StartScreen : AppCompatActivity() {
         val startScreen = findViewById<LinearLayout>(R.id.start_screen)
         val easyParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         val medParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val backParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM.toFloat())
         easyParams.setMargins(100,200,100,0)
         medParams.setMargins(100, 0, 100, 0)
+        backParams.setMargins(100, 550, 100, 0)
 
         val hardButton = Button(this)
         hardButton.setText(R.string.hard)
@@ -45,18 +48,17 @@ class StartScreen : AppCompatActivity() {
 
         val backButton = Button(this)
         backButton.setText(R.string.back)
-        backButton.layoutParams = medParams
+        backButton.layoutParams = backParams
         backButton.textSize = 30.0F
 
         val playGame = findViewById<View>(R.id.play_button) as Button
         val scoresScreen = findViewById<View>(R.id.see_scores) as Button
+        val topText = findViewById<TextView>(R.id.start_text)
 
         fun chooseDifficulty()
         {
             playGame.visibility = View.GONE
             scoresScreen.visibility = View.GONE
-
-            val topText = findViewById<TextView>(R.id.start_text)
             topText.setText(R.string.set_diff)
 
             startScreen.addView(easyButton)
@@ -99,6 +101,8 @@ class StartScreen : AppCompatActivity() {
 
             playGame.visibility = View.VISIBLE
             scoresScreen.visibility = View.VISIBLE
+
+            topText.setText(R.string.welcome)
         }
     }
 }
