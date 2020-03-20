@@ -31,13 +31,14 @@
         android:id="@+id/red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/red"
         android:textSize="30sp"
         android:layout_marginTop="100dp"
         android:layout_marginRight="205dp"
         android:paddingBottom="100dp"
         android:paddingTop="100dp"
-        android:layout_marginEnd="205dp" />
+        android:layout_marginEnd="205dp"
+        android:background="@color/red"
+        />
 
     <Button
         android:id="@+id/green"
@@ -47,9 +48,10 @@
         android:layout_marginTop="100dp"
         android:paddingTop="100dp"
         android:paddingBottom="100dp"
-        android:text="@string/green"
         android:textSize="30sp"
-        android:layout_marginStart="205dp" />
+        android:layout_marginStart="205dp"
+        android:background="@color/green"
+        />
 
     <Button
         android:id="@+id/blue"
@@ -59,21 +61,23 @@
         android:layout_marginTop="340dp"
         android:paddingTop="100dp"
         android:paddingBottom="100dp"
-        android:text="@string/blue"
         android:textSize="30sp"
-        android:layout_marginEnd="205dp" />
+        android:layout_marginEnd="205dp"
+        android:background="@color/blue"
+        />
 
     <Button
         android:id="@+id/yellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/yellow"
         android:textSize="30sp"
         android:layout_marginLeft="205dp"
         android:paddingBottom="100dp"
         android:paddingTop="100dp"
         android:layout_marginStart="205dp"
-        android:layout_marginTop="340dp" />
+        android:layout_marginTop="340dp"
+        android:background="@color/yellow"
+        />
 
     <TextView
         android:layout_width="match_parent"
