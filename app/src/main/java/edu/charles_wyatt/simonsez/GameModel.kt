@@ -1,5 +1,7 @@
 package edu.charles_wyatt.simonsez
 
+import android.nfc.Tag
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlin.random.Random
 
@@ -7,14 +9,16 @@ class GameModel: ViewModel()
 {
     private var random = Random
     private var gameSequence = (1..10).map { random.nextInt() }
-    //difficult will be represented by either 1, 2, or 3, with 3 being the hardest
-    private var diff: Int = 0
+    private var diff: String = ""
 
-    private fun setDifficulty(x: Int)
+    fun setDifficulty(x: String)
     {
         this.diff = x
     }
-
+    fun getDifficulty(): String
+    {
+        return this.diff
+    }
     private fun getRandomSequence(): List<Int>
     {
         return gameSequence

@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.start_screen.*
 
 
-class StartScreen : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+class StartScreen : AppCompatActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_screen)
 
