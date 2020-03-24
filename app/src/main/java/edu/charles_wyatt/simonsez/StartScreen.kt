@@ -74,17 +74,17 @@ class StartScreen : AppCompatActivity()
 
         easyButton.setOnClickListener()
         {
-            gameIntent.putExtra("diff", "easy")
+            gameIntent.putExtra("diff", "EASY")
             startActivity(gameIntent)
         }
         medButton.setOnClickListener()
         {
-            gameIntent.putExtra("diff", "medium")
+            gameIntent.putExtra("diff", "NORMAL")
             startActivity(gameIntent)
         }
         hardButton.setOnClickListener()
         {
-            gameIntent.putExtra("diff", "hard")
+            gameIntent.putExtra("diff", "HARD")
             startActivity(gameIntent)
         }
         backButton.setOnClickListener()

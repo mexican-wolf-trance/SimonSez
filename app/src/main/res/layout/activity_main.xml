@@ -79,5 +79,11 @@
         android:textAlignment="center"
         android:gravity="center_horizontal" />
 
+    <fragment
+        android:name="edu.charles_wyatt.simonsez.ScoresScreen"
+        android:id="@+id/come_see_scores"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
 </RelativeLayout>

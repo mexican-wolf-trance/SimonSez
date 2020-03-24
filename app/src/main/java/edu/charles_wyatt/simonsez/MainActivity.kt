@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.setMargins
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.scores_screen_fragment.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var model: GameModel
     private var viewFragment: ScoresScreen? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         val view = findViewById<RelativeLayout>(R.id.activity_main)
 
         val gameStart = findViewById<Button>(R.id.game_start)
-        gameStart.append(":${model.getDifficulty()} mode")
+        gameStart.append(": ${model.getDifficulty()} MODE")
 
         fun onFinish()
         {
@@ -57,12 +60,13 @@ class MainActivity : AppCompatActivity() {
         }
         gameStart.setOnClickListener()
         {
-            var sequence: MutableList<Int> = model.getRandomSequence().toMutableList()
-            Log.e("TAG", "Something is happening ${model.getRandomSequence()}")
-            while(sequence.size < 10)
-            {
+            var sequence: MutableList<Int>? = model.getSequence()
+            if (sequence != null) {
                 sequence.add((0..3).shuffled().first())
-                Log.e("TAG", "Sequence is $sequence")
+            }
+            Log.e("TAG", "Sequence is $sequence")
+            if (sequence != null) {
+                model.setSequence(sequence)
             }
         }
 
