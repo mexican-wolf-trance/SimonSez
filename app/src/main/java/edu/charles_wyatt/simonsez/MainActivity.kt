@@ -1,6 +1,5 @@
 package edu.charles_wyatt.simonsez
 
-import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
