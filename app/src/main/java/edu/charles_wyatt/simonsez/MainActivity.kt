@@ -26,10 +26,15 @@ class MainActivity : AppCompatActivity() {
         val view = findViewById<RelativeLayout>(R.id.activity_main)
 
         val gameStart = findViewById<Button>(R.id.game_start)
+        val finishButton = findViewById<TextView>(R.id.finish)
+
         gameStart.append(": ${model.getDifficulty()} MODE")
 
         fun onFinish()
         {
+            gameStart.isEnabled = false
+            finishButton.isEnabled = false
+
             val seeScoresButtonParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             seeScoresButtonParams.setMargins(200, 650, 200, 0)
 
@@ -43,17 +48,16 @@ class MainActivity : AppCompatActivity() {
             seeScoresButton.setOnClickListener()
             {
                 Toast.makeText(applicationContext, "So you wanna see scores, eh?", Toast.LENGTH_SHORT).show()
-                viewFragment = supportFragmentManager.findFragmentById(R.id.come_see_scores) as? ScoresScreen
+                viewFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? ScoresScreen
                 if (viewFragment == null)
                 {
                     viewFragment = ScoresScreen()
                     supportFragmentManager.beginTransaction()
-                        .add(R.id.come_see_scores, viewFragment!!)
+                        .replace(R.id.activity_main, viewFragment!!)
                         .commit()
                 }
             }
         }
-        val finishButton = findViewById<TextView>(R.id.finish)
         finishButton.setOnClickListener()
         {
             onFinish()
@@ -61,9 +65,7 @@ class MainActivity : AppCompatActivity() {
         gameStart.setOnClickListener()
         {
             var sequence: MutableList<Int>? = model.getSequence()
-            if (sequence != null) {
-                sequence.add((0..3).shuffled().first())
-            }
+            sequence?.add((0..3).shuffled().first())
             Log.e("TAG", "Sequence is $sequence")
             if (sequence != null) {
                 model.setSequence(sequence)
