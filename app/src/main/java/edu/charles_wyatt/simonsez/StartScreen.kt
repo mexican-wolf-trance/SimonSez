@@ -21,7 +21,6 @@ class StartScreen : AppCompatActivity()
         setContentView(R.layout.start_screen)
 
         val gameIntent = Intent(this@StartScreen, MainActivity::class.java)
-        val scoresIntent = Intent(this@StartScreen, ScoresScreen::class.java)
 
         val startScreen = findViewById<LinearLayout>(R.id.start_screen)
         val easyParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -54,13 +53,11 @@ class StartScreen : AppCompatActivity()
         backButton.textSize = 30.0F
 
         val playGame = findViewById<View>(R.id.play_button) as Button
-        val scoresScreen = findViewById<View>(R.id.see_scores) as Button
         val topText = findViewById<TextView>(R.id.start_text)
 
         fun chooseDifficulty()
         {
             playGame.visibility = View.GONE
-            scoresScreen.visibility = View.GONE
             topText.setText(R.string.set_diff)
 
             startScreen.addView(easyButton)
@@ -72,10 +69,6 @@ class StartScreen : AppCompatActivity()
         playGame.setOnClickListener()
         {
             chooseDifficulty()
-        }
-        scoresScreen.setOnClickListener()
-        {
-            startActivity(scoresIntent)
         }
 
 
@@ -102,7 +95,6 @@ class StartScreen : AppCompatActivity()
             startScreen.removeView(backButton)
 
             playGame.visibility = View.VISIBLE
-            scoresScreen.visibility = View.VISIBLE
 
             topText.setText(R.string.welcome)
         }

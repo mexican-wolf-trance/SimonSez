@@ -8,14 +8,17 @@ import kotlin.random.Random
 class GameModel: ViewModel()
 {
     private var random = Random
-    private var gameSequence = (1..10).map { random.nextInt() }
+    private var gameSequence = (1..4).map { random.nextInt() }
     private var diff: String = ""
 
-    fun setDifficulty(x: String)
+    fun setDifficulty(x: String?)
     {
-        this.diff = x
+        if (x != null)
+        {
+            this.diff = x
+        }
     }
-    fun getDifficulty(): String
+    fun getDifficulty(): String?
     {
         return this.diff
     }

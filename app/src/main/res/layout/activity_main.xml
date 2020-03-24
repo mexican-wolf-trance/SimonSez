@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/activity_main">
 
     <Button
         android:id="@+id/game_start"
@@ -47,14 +48,13 @@
         android:id="@+id/blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="205dp"
         android:layout_marginTop="310dp"
+        android:layout_marginEnd="205dp"
+        android:layout_marginRight="205dp"
+        android:background="@color/blue"
         android:paddingTop="100dp"
         android:paddingBottom="100dp"
-        android:textSize="30sp"
-        android:layout_marginEnd="205dp"
-        android:background="@color/blue"
-        />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/yellow"
@@ -69,12 +69,13 @@
         android:background="@color/yellow"
         />
 
-    <TextView
+    <Button
+        android:id="@+id/finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="555dp"
         android:textSize="20sp"
-        android:text="ROUND"
+        android:text="@string/finish"
         android:textAlignment="center"
         android:gravity="center_horizontal" />
 

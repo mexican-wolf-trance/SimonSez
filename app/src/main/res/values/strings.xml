@@ -13,5 +13,7 @@
     <string name="green">GREEN</string>
     <string name="blue">BLUE</string>
     <string name="yellow">YELLOW</string>
+    <string name="congrats">GAME OVER\nSee Scores</string>
+    <string name="finish">FINISH</string>
 
 </resources>
