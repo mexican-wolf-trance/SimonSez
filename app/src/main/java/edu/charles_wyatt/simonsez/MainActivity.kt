@@ -2,6 +2,7 @@ package edu.charles_wyatt.simonsez
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -11,15 +12,18 @@ import androidx.lifecycle.ViewModelProvider
 class MainActivity : AppCompatActivity() {
 
     private lateinit var model: GameModel
+    private var viewFragment: ScoresScreen? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         model = ViewModelProvider(this).get(GameModel::class.java)
+        model.setDifficulty(intent.getStringExtra("diff"))
+
         val view = findViewById<RelativeLayout>(R.id.activity_main)
 
-        model.setDifficulty(intent.getStringExtra("diff"))
-        Toast.makeText(applicationContext, "The difficulty is ${model.getDifficulty()}", Toast.LENGTH_SHORT).show()
+        val gameStart = findViewById<Button>(R.id.game_start)
+        gameStart.append(":${model.getDifficulty()} mode")
 
         fun onFinish()
         {
@@ -36,12 +40,30 @@ class MainActivity : AppCompatActivity() {
             seeScoresButton.setOnClickListener()
             {
                 Toast.makeText(applicationContext, "So you wanna see scores, eh?", Toast.LENGTH_SHORT).show()
+                viewFragment = supportFragmentManager.findFragmentById(R.id.come_see_scores) as? ScoresScreen
+                if (viewFragment == null)
+                {
+                    viewFragment = ScoresScreen()
+                    supportFragmentManager.beginTransaction()
+                        .add(R.id.come_see_scores, viewFragment!!)
+                        .commit()
+                }
             }
         }
         val finishButton = findViewById<TextView>(R.id.finish)
         finishButton.setOnClickListener()
         {
             onFinish()
+        }
+        gameStart.setOnClickListener()
+        {
+            var sequence: MutableList<Int> = model.getRandomSequence().toMutableList()
+            Log.e("TAG", "Something is happening ${model.getRandomSequence()}")
+            while(sequence.size < 10)
+            {
+                sequence.add((0..3).shuffled().first())
+                Log.e("TAG", "Sequence is $sequence")
+            }
         }
 
     }

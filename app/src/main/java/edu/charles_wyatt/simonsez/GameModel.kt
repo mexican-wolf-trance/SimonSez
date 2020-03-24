@@ -8,7 +8,7 @@ import kotlin.random.Random
 class GameModel: ViewModel()
 {
     private var random = Random
-    private var gameSequence = (1..4).map { random.nextInt() }
+    private var gameSequence: List<Int>? = null
     private var diff: String = ""
 
     fun setDifficulty(x: String?)
@@ -22,9 +22,10 @@ class GameModel: ViewModel()
     {
         return this.diff
     }
-    private fun getRandomSequence(): List<Int>
+    fun getRandomSequence(): List<Int>
     {
-        return gameSequence
+        gameSequence = (1..4).map { random.nextInt(until = 4) }
+        return gameSequence as List<Int>
     }
 
 }
