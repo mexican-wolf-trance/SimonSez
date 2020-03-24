@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/game_screen_layout">
+
+    <Button
+        android:id="@+id/game_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+
+        />
+
+    <Button
+        android:id="@+id/red"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="205dp"
+        android:paddingBottom="100dp"
+        android:paddingTop="100dp"
+        android:layout_marginEnd="205dp"
+        android:background="@color/red"
+        />
+
+    <Button
+        android:id="@+id/green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="205dp"
+        android:layout_marginTop="70dp"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp"
+        android:textSize="30sp"
+        android:layout_marginStart="205dp"
+        android:background="@color/green"
+        />
+
+    <Button
+        android:id="@+id/blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:layout_marginEnd="205dp"
+        android:layout_marginRight="205dp"
+        android:background="@color/blue"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/yellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_marginLeft="205dp"
+        android:paddingBottom="100dp"
+        android:paddingTop="100dp"
+        android:layout_marginStart="205dp"
+        android:layout_marginTop="310dp"
+        android:background="@color/yellow"
+        />
+
+    <Button
+        android:id="@+id/finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="555dp"
+        android:textSize="20sp"
+        android:text="@string/finish"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+
+</RelativeLayout>
