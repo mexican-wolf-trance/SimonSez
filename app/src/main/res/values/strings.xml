@@ -13,7 +13,8 @@
     <string name="green">GREEN</string>
     <string name="blue">BLUE</string>
     <string name="yellow">YELLOW</string>
-    <string name="congrats">GAME OVER\nSee Scores</string>
+    <string name="congrats">See Scores</string>
     <string name="finish">FINISH</string>
+    <string name="play_again">PLAY AGAIN</string>
 
 </resources>
