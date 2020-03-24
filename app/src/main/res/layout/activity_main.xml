@@ -8,17 +8,14 @@
     android:id="@+id/activity_main">
 
     <fragment
-        android:name="edu.charles_wyatt.simonsez.ScoresScreen"
-        android:id="@+id/come_see_scores"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <fragment
         android:name="edu.charles_wyatt.simonsez.GameScreenFragment"
         android:id="@+id/game_screen_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-
-
+    <fragment
+        android:name="edu.charles_wyatt.simonsez.ScoresScreen"
+        android:id="@+id/come_see_scores"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

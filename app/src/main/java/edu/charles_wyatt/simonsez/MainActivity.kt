@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var model: GameModel
-    private var viewFragment: ScoresScreen? = null
+    private var scoreFragment: ScoresScreen? = null
+    private var gameFragment: GameScreenFragment? = null
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -67,14 +68,23 @@ class MainActivity : AppCompatActivity() {
 //            view.addView(playAgainButton)
 //
 //            seeScoresButton.setOnClickListener()
-                viewFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? ScoresScreen
-                if (viewFragment == null)
-                {
-                    viewFragment = ScoresScreen()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.activity_main, viewFragment!!)
-                        .commit()
-                }
+//        scoreFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? ScoresScreen
+//        if (scoreFragment == null)
+//        {
+//            scoreFragment = ScoresScreen()
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.activity_main, scoreFragment!!)
+//                .commit()
+//        }
+
+        gameFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? GameScreenFragment
+        if (gameFragment == null)
+        {
+            gameFragment = GameScreenFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.activity_main, gameFragment!!)
+                .commit()
+        }
 
 //            playAgainButton.setOnClickListener()
 //            {
