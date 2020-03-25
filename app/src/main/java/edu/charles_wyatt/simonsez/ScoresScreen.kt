@@ -32,14 +32,12 @@ class ScoresScreen : Fragment()
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        val view =  inflater.inflate(R.layout.scores_screen_fragment, container, false)
+    ): View?
+    { val view =  inflater.inflate(R.layout.scores_screen_fragment, container, false)
         view.play_again.setOnClickListener()
         {
-            listener?.backToStart()
+            activity?.finish()
         }
-
         return view
     }
 }

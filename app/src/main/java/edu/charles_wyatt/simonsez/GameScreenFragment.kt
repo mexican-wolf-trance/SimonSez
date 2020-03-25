@@ -33,7 +33,6 @@ class GameScreenFragment: Fragment()
     }
     var listener: StateListener? = null
 
-
     override fun onAttach(context: Context)
     {
         super.onAttach(context)
@@ -46,7 +45,9 @@ class GameScreenFragment: Fragment()
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { val thisView = inflater.inflate(R.layout.game_screen_fragment, container, false)
+    ): View?
+    { val thisView = inflater.inflate(R.layout.game_screen_fragment, container, false)
+        thisView.game_start.append(": ${model.getDifficulty()} MODE")
         thisView.game_start.setOnClickListener()
         {
             listener?.startButtonPressed()

@@ -38,7 +38,7 @@ class GameModel: ViewModel()
         this.stopGame()
     }
 
-    fun stopGame()
+    private fun stopGame()
     {
         handler?.removeCallbacks(runnable)
         isRunning = false
@@ -64,7 +64,7 @@ class GameModel: ViewModel()
         when (this.diff)
         {
             "EASY" -> sequence = (1..2).map { random.nextInt(until = 4) }
-            "MEDIUM" -> sequence = (1..3).map { random.nextInt(until = 4) }
+            "NORMAL" -> sequence = (1..3).map { random.nextInt(until = 4) }
             "HARD" -> sequence =(1..5).map { random.nextInt(until = 4) }
         }
         gameSequence = sequence?.toMutableList()

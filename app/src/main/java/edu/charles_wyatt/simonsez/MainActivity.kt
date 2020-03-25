@@ -24,8 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         model = ViewModelProvider(this).get(GameModel::class.java)
         model.setDifficulty(intent.getStringExtra("diff"))
-        val gameStart = findViewById<Button>(R.id.game_start)
-        gameStart.append(": ${model.getDifficulty()} MODE")
+
 //        val view = findViewById<RelativeLayout>(R.id.activity_main)
 //        val finishButton = findViewById<TextView>(R.id.finish)
 //        val redButton = findViewById<TextView>(R.id.red)
@@ -116,6 +115,14 @@ class MainActivity : AppCompatActivity() {
                 Log.e("Tag", "Yellow Button Pressed")
             }
         }
+        scoreFragment?.listener = object: ScoresScreen.StateListener
+        {
+            override fun backToStart()
+            {
+                finish()
+                Log.e("TAG", "Supposed to finish this activity")
+            }
+        }
         model.listener = object: GameModel.Listener
         {
             override fun sequenceTriggered()
@@ -124,25 +131,5 @@ class MainActivity : AppCompatActivity() {
                 gameFragment?.runUIUpdate()
             }
         }
-
-//            playAgainButton.setOnClickListener()
-//            {
-//                backToStart()
-//            }
-//        }
-//        finishButton.setOnClickListener()
-//        {
-//            onFinish()
-//        }
-//        gameStart.setOnClickListener()
-//        {
-//            var sequence: MutableList<Int>? = model.getSequence()
-//            sequence?.add((0..3).shuffled().first())
-//            Log.e("TAG", "Sequence is $sequence")
-//            if (sequence != null) {
-//                model.setSequence(sequence)
-//            }
-//        }
-
     }
 }

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/game_screen_layout">
+    android:id="@+id/game_screen_layout"
+    android:background="@color/black">
 
     <Button
         android:id="@+id/game_start"
