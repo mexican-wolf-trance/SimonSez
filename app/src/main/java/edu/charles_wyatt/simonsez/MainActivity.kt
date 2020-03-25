@@ -86,6 +86,39 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
+        gameFragment?.listener = object: GameScreenFragment.StateListener
+        {
+            override fun startButtonPressed()
+            {
+
+            }
+
+            override fun finishButtonPressed()
+            {
+
+            }
+
+            override fun redButtonPressed()
+            {
+
+            }
+
+            override fun greenButtonPressed()
+            {
+
+            }
+
+            override fun blueButtonPressed()
+            {
+
+            }
+
+            override fun yellowButtonPressed()
+            {
+
+            }
+        }
+
 //            playAgainButton.setOnClickListener()
 //            {
 //                backToStart()
