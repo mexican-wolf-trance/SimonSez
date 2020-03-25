@@ -39,7 +39,7 @@ class GameScreenFragment: Fragment()
         super.onAttach(context)
         activity?.apply {
             model = ViewModelProvider(this).get(GameModel::class.java) }
-        Log.e("TAG", "Am I here?")
+        Log.e("TAG", "Am I here? ${model.getDifficulty()}")
     }
 
     override fun onCreateView(
@@ -100,7 +100,7 @@ class GameScreenFragment: Fragment()
                         view.setBackgroundColor((animatedValue))
                     }
                 }
-                animator?.startDelay = 200
+                animator?.startDelay = (index * 200).toLong()
                 animator?.start()
             }
         }

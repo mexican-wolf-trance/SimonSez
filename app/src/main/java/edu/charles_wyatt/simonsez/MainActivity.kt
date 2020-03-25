@@ -90,32 +90,42 @@ class MainActivity : AppCompatActivity() {
         {
             override fun startButtonPressed()
             {
-
+                Log.e("Tag", "Start Button Pressed")
+                model.startGame()
             }
 
             override fun finishButtonPressed()
             {
-
+                Log.e("Tag", "Finish Button Pressed")
+                model.stopGame()
             }
 
             override fun redButtonPressed()
             {
-
+                Log.e("Tag", "Red Button Pressed")
             }
 
             override fun greenButtonPressed()
             {
-
+                Log.e("Tag", "Green Button Pressed")
             }
 
             override fun blueButtonPressed()
             {
-
+                Log.e("Tag", "Blue Button Pressed")
             }
 
             override fun yellowButtonPressed()
             {
-
+                Log.e("Tag", "Yellow Button Pressed")
+            }
+        }
+        model.listener = object: GameModel.Listener
+        {
+            override fun sequenceTriggered()
+            {
+                Log.e("TAG", "Sequence triggerrrrrrrred")
+                gameFragment?.runUIUpdate()
             }
         }
 
