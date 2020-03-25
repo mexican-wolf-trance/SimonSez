@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         {
             gameFragment = GameScreenFragment()
             supportFragmentManager.beginTransaction()
-                .replace(R.id.activity_main, gameFragment!!)
+                .add(R.id.activity_main, gameFragment!!)
                 .commit()
         }
 

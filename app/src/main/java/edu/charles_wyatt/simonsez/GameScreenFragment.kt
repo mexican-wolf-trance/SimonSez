@@ -1,12 +1,16 @@
 package edu.charles_wyatt.simonsez
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.game_screen_fragment.*
@@ -74,11 +78,30 @@ class GameScreenFragment: Fragment()
     fun runUIUpdate()
     {
         var sequence = model.getSequence()
-        for (index in 0 until 4)
-        {
-            val view = when(index)
-            {
-                1 ->
+        activity?.let {activity ->
+            for (index in 0 until 4) {
+                val view = when (index) {
+                    0 -> red
+                    1 -> green
+                    2 -> yellow
+                    3 -> blue
+                    else -> blue
+                }
+                val originalColor = view.background as? ColorDrawable
+                val redColor = ContextCompat.getColor(activity, R.color.red)
+                val animator = ValueAnimator.ofObject(
+                    ArgbEvaluator(),
+                    originalColor?.color,
+                    redColor,
+                    originalColor?.color
+                )
+                animator.addUpdateListener { valueAnimator ->
+                    (valueAnimator.animatedValue as? Int)?.let { animatedValue ->
+                        view.setBackgroundColor((animatedValue))
+                    }
+                }
+                animator?.startDelay = 200
+                animator?.start()
             }
         }
     }
