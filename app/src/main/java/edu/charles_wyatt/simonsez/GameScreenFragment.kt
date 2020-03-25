@@ -77,107 +77,45 @@ class GameScreenFragment: Fragment()
 
     fun runUIUpdate()
     {
-        var sequence = model.getSequence()
+        val sequence = model.getSequence()
         activity?.let {activity ->
-            for (index in 0 until 4) {
-                val view = when (index) {
-                    0 -> red
-                    1 -> green
-                    2 -> yellow
-                    3 -> blue
-                    else -> blue
-                }
-                val originalColor = view.background as? ColorDrawable
-                val redColor = ContextCompat.getColor(activity, R.color.red)
-                val animator = ValueAnimator.ofObject(
-                    ArgbEvaluator(),
-                    originalColor?.color,
-                    redColor,
-                    originalColor?.color
-                )
-                animator.addUpdateListener { valueAnimator ->
-                    (valueAnimator.animatedValue as? Int)?.let { animatedValue ->
-                        view.setBackgroundColor((animatedValue))
+            if (sequence != null)
+            {
+                Log.e("TAG", "The sequence is ${model.getSequence()}")
+                for (index in sequence)
+                {
+                    val view = when (index)
+                    {
+                        0 -> red
+                        1 -> green
+                        2 -> yellow
+                        3 -> blue
+                        else -> blue
                     }
+                    val originalColor = view.background as? ColorDrawable
+                    val blackColor = ContextCompat.getColor(activity, R.color.black)
+                    val animator = ValueAnimator.ofObject(
+                        ArgbEvaluator(),
+                        originalColor?.color,
+                        blackColor,
+                        originalColor?.color
+                    )
+                    animator.addUpdateListener { valueAnimator ->
+                        (valueAnimator.animatedValue as? Int)?.let { animatedValue ->
+                            view.setBackgroundColor((animatedValue))
+                        }
+                    }
+                    animator?.startDelay = (index * 200).toLong()
+                    animator?.start()
                 }
-                animator?.startDelay = (index * 200).toLong()
-                animator?.start()
+            }
+            sequence?.add((0..3).shuffled().first())
+            Log.e("TAG", "Sequence is $sequence")
+            if (sequence != null)
+            {
+                model.setSequence(sequence)
+
             }
         }
     }
-
-
-//    val view = findViewById<RelativeLayout>(R.id.game_screen_layout)
-//
-//    val gameStart = findViewById<Button>(R.id.game_start)
-//    val finishButton = findViewById<TextView>(R.id.finish)
-//    val redButton = findViewById<TextView>(R.id.red)
-//    val greenButton = findViewById<TextView>(R.id.green)
-//    val blueButton = findViewById<TextView>(R.id.blue)
-//    val yellowButton = findViewById<TextView>(R.id.yellow)
-
-//    fun backToStart()
-//    {
-//        finish
-//    }
-//    gameStart.append(": ${model.getDifficulty()} MODE")
-//
-//    fun onFinish()
-//    {
-//        gameStart.isEnabled = false
-//        finishButton.isEnabled = false
-//        redButton.isEnabled = false
-//        greenButton.isEnabled = false
-//        blueButton.isEnabled = false
-//        yellowButton.isEnabled = false
-//
-//        val seeScoresButtonParams = LinearLayout.LayoutParams(
-//            LinearLayout.LayoutParams.MATCH_PARENT,
-//            ViewGroup.LayoutParams.WRAP_CONTENT
-//        )
-//        seeScoresButtonParams.setMargins(200, 600, 200, 0)
-//        val playAgainButtonParams = LinearLayout.LayoutParams(
-//            LinearLayout.LayoutParams.MATCH_PARENT,
-//            ViewGroup.LayoutParams.WRAP_CONTENT
-//        )
-//        playAgainButtonParams.setMargins(200, 400, 200, 0)
-//
-//        val seeScoresButton = Button(this)
-//        val playAgainButton = Button(this)
-//
-//        seeScoresButton.setText(R.string.congrats)
-//        seeScoresButton.textSize = 30.0F
-//        seeScoresButton.layoutParams = seeScoresButtonParams
-//
-//        playAgainButton.setText(R.string.play_again)
-//        playAgainButton.textSize = 30.0F
-//        playAgainButton.layoutParams = playAgainButtonParams
-//
-//        view.addView(seeScoresButton)
-//        view.addView(playAgainButton)
-//
-//        seeScoresButton.setOnClickListener()
-//        {
-//        }
-//        playAgainButton.setOnClickListener()
-//        {
-//            backToStart()
-//        }
-//
-//        finishButton.setOnClickListener()
-//        {
-//            onFinish()
-//        }
-//        gameStart.setOnClickListener()
-//        {
-//            var sequence: MutableList<Int>? = model.getSequence()
-//            sequence?.add((0..3).shuffled().first())
-//            Log.e("TAG", "Sequence is $sequence")
-//            if (sequence != null)
-//            {
-//                model.setSequence(sequence)
-//            }
-//        }
-//
-//    }
 }

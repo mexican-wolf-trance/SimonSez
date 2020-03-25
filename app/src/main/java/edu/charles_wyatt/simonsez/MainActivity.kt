@@ -10,6 +10,7 @@ import androidx.core.view.setMargins
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.scores_screen_fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.game_screen_fragment.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,17 +24,14 @@ class MainActivity : AppCompatActivity() {
 
         model = ViewModelProvider(this).get(GameModel::class.java)
         model.setDifficulty(intent.getStringExtra("diff"))
-
+        val gameStart = findViewById<Button>(R.id.game_start)
+        gameStart.append(": ${model.getDifficulty()} MODE")
 //        val view = findViewById<RelativeLayout>(R.id.activity_main)
-//
-//        val gameStart = findViewById<Button>(R.id.game_start)
 //        val finishButton = findViewById<TextView>(R.id.finish)
 //        val redButton = findViewById<TextView>(R.id.red)
 //        val greenButton = findViewById<TextView>(R.id.green)
 //        val blueButton = findViewById<TextView>(R.id.blue)
 //        val yellowButton = findViewById<TextView>(R.id.yellow)
-
-//        gameStart.append(": ${model.getDifficulty()} MODE")
 //
 //        fun backToStart()
 //        {
@@ -68,14 +66,6 @@ class MainActivity : AppCompatActivity() {
 //            view.addView(playAgainButton)
 //
 //            seeScoresButton.setOnClickListener()
-//        scoreFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? ScoresScreen
-//        if (scoreFragment == null)
-//        {
-//            scoreFragment = ScoresScreen()
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.activity_main, scoreFragment!!)
-//                .commit()
-//        }
 
         gameFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? GameScreenFragment
         if (gameFragment == null)
@@ -96,8 +86,14 @@ class MainActivity : AppCompatActivity() {
 
             override fun finishButtonPressed()
             {
-                Log.e("Tag", "Finish Button Pressed")
-                model.stopGame()
+                scoreFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? ScoresScreen
+                if (scoreFragment == null)
+                {
+                    scoreFragment = ScoresScreen()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.activity_main, scoreFragment!!)
+                        .commit()
+                }
             }
 
             override fun redButtonPressed()

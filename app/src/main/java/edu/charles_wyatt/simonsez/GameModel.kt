@@ -1,7 +1,5 @@
 package edu.charles_wyatt.simonsez
 
-
-import android.nfc.Tag
 import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -17,8 +15,8 @@ class GameModel: ViewModel()
 
 
     private var random = Random
-    private val sequence: List<Int>? = (1..4).map { random.nextInt(until = 4) }
-    private var gameSequence: MutableList<Int>? = sequence?.toMutableList()
+    private var sequence: List<Int>? = null
+    private var gameSequence: MutableList<Int>? = null
     private var diff: String = ""
     private var score: Int = 0
     private var handler: Handler? = null
@@ -37,7 +35,7 @@ class GameModel: ViewModel()
     }
     private var runnable: Runnable = Runnable {
         listener?.sequenceTriggered()
-        this.triggerSequence()
+        this.stopGame()
     }
 
     fun stopGame()
@@ -56,9 +54,20 @@ class GameModel: ViewModel()
     {
         this.score = x
     }
+    fun getScore(): Int
+    {
+        return this.score
+    }
     fun setDifficulty(x: String?)
     {
         if (x != null) { this.diff = x }
+        when (this.diff)
+        {
+            "EASY" -> sequence = (1..2).map { random.nextInt(until = 4) }
+            "MEDIUM" -> sequence = (1..3).map { random.nextInt(until = 4) }
+            "HARD" -> sequence =(1..5).map { random.nextInt(until = 4) }
+        }
+        gameSequence = sequence?.toMutableList()
     }
     fun getDifficulty(): String?
     {
