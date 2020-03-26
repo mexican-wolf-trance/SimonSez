@@ -50,21 +50,26 @@ class MainActivity : AppCompatActivity() {
             override fun redButtonPressed()
             {
                 Log.e("Tag", "Red Button Pressed")
+                model?.setPlayerSequence(0)
             }
 
             override fun greenButtonPressed()
             {
                 Log.e("Tag", "Green Button Pressed")
+                model?.setPlayerSequence(1)
+
             }
 
             override fun blueButtonPressed()
             {
                 Log.e("Tag", "Blue Button Pressed")
+                model?.setPlayerSequence(3)
             }
 
             override fun yellowButtonPressed()
             {
                 Log.e("Tag", "Yellow Button Pressed")
+                model?.setPlayerSequence(2)
             }
 
             override fun scoresButtonPressed()

@@ -18,12 +18,14 @@ class GameModel: ViewModel()
     interface Listener
     {
         fun sequenceTriggered()
+        //fun setPlayerSequence()
     }
 
 
     private var random = Random
     private var sequence: List<Int>? = null
     private var gameSequence: MutableList<Int>? = null
+    private var playerSequence: MutableList<Int>? = arrayListOf()
     private var diff: String = ""
     private var score: Int = 0
     private var handler: Handler? = null
@@ -87,5 +89,14 @@ class GameModel: ViewModel()
     fun getSequence(): MutableList<Int>?
     {
         return gameSequence as MutableList<Int>
+    }
+    fun setPlayerSequence(x: Int)
+    {
+        this.playerSequence?.add(x)
+        Log.e("TAG", "Player sequence: ${this.playerSequence}")
+    }
+    fun compareSequence()
+    {
+
     }
 }

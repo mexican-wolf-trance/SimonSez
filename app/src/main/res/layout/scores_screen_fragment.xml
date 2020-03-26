@@ -11,7 +11,7 @@ tools:context=".ScoresScreen">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/seeScores"
+        android:text="@string/top10"
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:textSize="30sp"
