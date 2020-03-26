@@ -1,14 +1,8 @@
 package edu.charles_wyatt.simonsez
 
-import android.content.Context
 import android.os.Handler
 import android.util.Log
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.lifecycle.ViewModel
-import kotlinx.android.synthetic.main.game_screen_fragment.view.*
 import kotlin.random.Random
 
 class GameModel: ViewModel()
@@ -18,7 +12,6 @@ class GameModel: ViewModel()
     interface Listener
     {
         fun sequenceTriggered()
-        //fun compareSequence()
         fun theGameIsOver()
     }
 
@@ -35,11 +28,6 @@ class GameModel: ViewModel()
     var isRunning = false
     private set
 
-//    fun getCompareSequence()
-//    {
-//        listener?.compareSequence()
-//    }
-
     fun startGame()
     {
         if (handler == null)
@@ -47,7 +35,6 @@ class GameModel: ViewModel()
             handler = Handler()
             handler?.postDelayed(runnable, 1200)
             isRunning = true
-            //getCompareSequence()
             this.playerSequence = arrayListOf()
             this.index = 0
         }
@@ -98,22 +85,20 @@ class GameModel: ViewModel()
     }
     fun getSequence(): MutableList<Int>?
     {
-        Log.e("TAG", "Got the sequence: ${this.gameSequence}")
         return gameSequence as MutableList<Int>
     }
     fun setPlayerSequence(x: Int)
     {
-        Log.e("TAG", "This is the player sequence: ${this.playerSequence}")
-        if (this.gameSequence?.get(this.index) == x)
+        Log.e("TAG", "Game sequence : ${this.gameSequence} and game sequence size : ${this.gameSequence?.size} and Index : ${this.index} and x : $x")
+        if (this.index <= this.gameSequence?.size!!)
         {
-            this.playerSequence?.add(x)
-            this.index++
+            if (this.gameSequence?.get(this.index) == x)
+            {
+                this.playerSequence?.add(x)
+                this.index++
+            }
+            else { endGame() }
         }
-        else
-        {
-            endGame()
-        }
-        Log.e("TAG", "Player sequence: ${this.playerSequence}")
     }
     fun getPlayerSequence(): MutableList<Int>?
     {

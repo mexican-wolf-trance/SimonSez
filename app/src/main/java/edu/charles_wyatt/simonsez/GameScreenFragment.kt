@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -40,7 +39,6 @@ class GameScreenFragment: Fragment()
         super.onAttach(context)
         activity?.apply {
             model = ViewModelProvider(this).get(GameModel::class.java) }
-        Log.e("TAG", "GameScreen")
     }
 
     override fun onCreateView(
@@ -122,10 +120,9 @@ class GameScreenFragment: Fragment()
                     view.setBackgroundColor((animatedValue))
                 }
             }
-                animator?.startDelay = (count * 1000).toLong()
-                animator?.duration = 1000
-                animator?.start()
-                Log.e("TAG", "Count is $count")
+            animator?.startDelay = (count * 1000).toLong()
+            animator?.duration = 1000
+            animator?.start()
         }
     }
 }

@@ -1,16 +1,8 @@
 package edu.charles_wyatt.simonsez
 
-import android.app.PendingIntent.getActivity
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.game_screen_fragment.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,40 +29,22 @@ class MainActivity : AppCompatActivity() {
         gameFragment?.listener = object: GameScreenFragment.StateListener
         {
             override fun startButtonPressed()
-            {
-                Log.e("Tag", "Start Button Pressed")
-                model.startGame()
-            }
+            { model.startGame() }
 
             override fun finishButtonPressed()
-            {
-                gameFragment?.getButtons()
-            }
+            { gameFragment?.getButtons() }
 
             override fun redButtonPressed()
-            {
-                Log.e("Tag", "Red Button Pressed")
-                model.setPlayerSequence(0)
-            }
+            { model.setPlayerSequence(0) }
 
             override fun greenButtonPressed()
-            {
-                Log.e("Tag", "Green Button Pressed")
-                model.setPlayerSequence(1)
-
-            }
+            { model.setPlayerSequence(1) }
 
             override fun blueButtonPressed()
-            {
-                Log.e("Tag", "Blue Button Pressed")
-                model.setPlayerSequence(3)
-            }
+            { model.setPlayerSequence(3) }
 
             override fun yellowButtonPressed()
-            {
-                Log.e("Tag", "Yellow Button Pressed")
-                model.setPlayerSequence(2)
-            }
+            { model.setPlayerSequence(2) }
 
             override fun scoresButtonPressed()
             {
@@ -85,9 +59,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun backToStartPressed()
-            {
-                finish()
-            }
+            { finish() }
         }
 
         model.listener = object: GameModel.Listener
@@ -96,7 +68,6 @@ class MainActivity : AppCompatActivity() {
             {
                 var count = 0
                 val sequence = model.getSequence()
-                Log.e("TAG", "The sequence is ${model.getSequence()}")
 
                 if (sequence != null)
                 {
