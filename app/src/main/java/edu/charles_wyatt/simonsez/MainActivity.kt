@@ -50,26 +50,26 @@ class MainActivity : AppCompatActivity() {
             override fun redButtonPressed()
             {
                 Log.e("Tag", "Red Button Pressed")
-                model?.setPlayerSequence(0)
+                model.setPlayerSequence(0)
             }
 
             override fun greenButtonPressed()
             {
                 Log.e("Tag", "Green Button Pressed")
-                model?.setPlayerSequence(1)
+                model.setPlayerSequence(1)
 
             }
 
             override fun blueButtonPressed()
             {
                 Log.e("Tag", "Blue Button Pressed")
-                model?.setPlayerSequence(3)
+                model.setPlayerSequence(3)
             }
 
             override fun yellowButtonPressed()
             {
                 Log.e("Tag", "Yellow Button Pressed")
-                model?.setPlayerSequence(2)
+                model.setPlayerSequence(2)
             }
 
             override fun scoresButtonPressed()
@@ -94,9 +94,25 @@ class MainActivity : AppCompatActivity() {
         {
             override fun sequenceTriggered()
             {
-                Log.e("TAG", "Sequence triggerrrrrrrred")
-                gameFragment?.gameTime()
+                var count = 0
+                val sequence = model.getSequence()
+                Log.e("TAG", "The sequence is ${model.getSequence()}")
+
+                if (sequence != null)
+                {
+                    for (index in sequence)
+                    {
+                        gameFragment?.gameTime(index, count)
+                        count++
+                    }
+                }
+
+                sequence?.add((0..3).shuffled().first())
+                if (sequence != null) { model.setSequence(sequence) }
             }
+
+            override fun theGameIsOver()
+            { gameFragment?.getButtons() }
         }
     }
 }

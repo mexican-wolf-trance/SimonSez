@@ -18,20 +18,27 @@ class GameModel: ViewModel()
     interface Listener
     {
         fun sequenceTriggered()
-        //fun setPlayerSequence()
+        //fun compareSequence()
+        fun theGameIsOver()
     }
 
 
     private var random = Random
-    private var sequence: List<Int>? = null
-    private var gameSequence: MutableList<Int>? = null
+    private var sequence: List<Int>? = arrayListOf()
+    private var gameSequence: MutableList<Int>? = arrayListOf()
     private var playerSequence: MutableList<Int>? = arrayListOf()
     private var diff: String = ""
     private var score: Int = 0
     private var handler: Handler? = null
+    private var index = 0
 
     var isRunning = false
     private set
+
+//    fun getCompareSequence()
+//    {
+//        listener?.compareSequence()
+//    }
 
     fun startGame()
     {
@@ -40,6 +47,9 @@ class GameModel: ViewModel()
             handler = Handler()
             handler?.postDelayed(runnable, 1200)
             isRunning = true
+            //getCompareSequence()
+            this.playerSequence = arrayListOf()
+            this.index = 0
         }
     }
     private var runnable: Runnable = Runnable {
@@ -88,15 +98,29 @@ class GameModel: ViewModel()
     }
     fun getSequence(): MutableList<Int>?
     {
+        Log.e("TAG", "Got the sequence: ${this.gameSequence}")
         return gameSequence as MutableList<Int>
     }
     fun setPlayerSequence(x: Int)
     {
-        this.playerSequence?.add(x)
+        Log.e("TAG", "This is the player sequence: ${this.playerSequence}")
+        if (this.gameSequence?.get(this.index) == x)
+        {
+            this.playerSequence?.add(x)
+            this.index++
+        }
+        else
+        {
+            endGame()
+        }
         Log.e("TAG", "Player sequence: ${this.playerSequence}")
     }
-    fun compareSequence()
+    fun getPlayerSequence(): MutableList<Int>?
     {
-
+        return playerSequence
+    }
+    private fun endGame()
+    {
+        listener?.theGameIsOver()
     }
 }

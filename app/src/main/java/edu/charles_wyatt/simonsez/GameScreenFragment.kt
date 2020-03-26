@@ -79,6 +79,13 @@ class GameScreenFragment: Fragment()
 
     fun getButtons()
     {
+        game_start.isEnabled = false
+        finish.isEnabled = false
+        red.isEnabled = false
+        green.isEnabled = false
+        yellow.isEnabled = false
+        blue.isEnabled = false
+
         go_to_the_scores.visibility = View.VISIBLE
         back_to_start.visibility = View.VISIBLE
         go_to_the_scores.setOnClickListener()
@@ -91,42 +98,34 @@ class GameScreenFragment: Fragment()
         }
     }
 
-    fun gameTime()
+    fun gameTime(index: Int, count: Int)
     {
-        val sequence = model.getSequence()
         activity?.let {activity ->
-            if (sequence != null)
+            val view = when (index)
             {
-                Log.e("TAG", "The sequence is ${model.getSequence()}")
-                for (index in sequence)
-                {
-                    val view = when (index)
-                    {
-                        0 -> red
-                        1 -> green
-                        2 -> yellow
-                        3 -> blue
-                        else -> blue
-                    }
-                    val originalColor = view.background as? ColorDrawable
-                    val blackColor = ContextCompat.getColor(activity, R.color.black)
-                    val animator = ValueAnimator.ofObject(
-                        ArgbEvaluator(),
-                        originalColor?.color,
-                        blackColor,
-                        originalColor?.color
-                    )
-                    animator.addUpdateListener { valueAnimator ->
-                        (valueAnimator.animatedValue as? Int)?.let { animatedValue ->
-                            view.setBackgroundColor((animatedValue))
-                        }
-                    }
-                    animator?.startDelay = (index * 200).toLong()
-                    animator?.start()
+                0 -> red
+                1 -> green
+                2 -> yellow
+                3 -> blue
+                else -> blue
+            }
+            val originalColor = view.background as? ColorDrawable
+            val blackColor = ContextCompat.getColor(activity, R.color.black)
+            val animator = ValueAnimator.ofObject(
+                ArgbEvaluator(),
+                originalColor?.color,
+                blackColor,
+                originalColor?.color
+            )
+            animator.addUpdateListener { valueAnimator ->
+                (valueAnimator.animatedValue as? Int)?.let { animatedValue ->
+                    view.setBackgroundColor((animatedValue))
                 }
             }
-            sequence?.add((0..3).shuffled().first())
-            if (sequence != null) { model.setSequence(sequence) }
+                animator?.startDelay = (count * 1000).toLong()
+                animator?.duration = 1000
+                animator?.start()
+                Log.e("TAG", "Count is $count")
         }
     }
 }

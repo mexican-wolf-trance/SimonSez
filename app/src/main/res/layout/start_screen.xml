@@ -26,11 +26,11 @@
         android:layout_gravity="center_vertical"
         android:gravity="center"
         android:textSize="50sp"
-        android:layout_marginRight="75dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="75dp"
         android:text="@string/playButton" />
     <Button
         android:id="@+id/quit"
@@ -39,10 +39,10 @@
         android:layout_gravity="center_vertical"
         android:gravity="center"
         android:textSize="50sp"
-        android:layout_marginRight="75dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginStart="75dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="0dp"
         android:text="@string/quit" />
 
