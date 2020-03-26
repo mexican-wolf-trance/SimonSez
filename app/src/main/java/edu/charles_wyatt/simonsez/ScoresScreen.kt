@@ -25,7 +25,7 @@ class ScoresScreen : Fragment()
     { super.onAttach(context)
         activity?.apply {
             model = ViewModelProvider(this).get(GameModel::class.java) }
-        Log.e("TAG", "Am I here?")
+        Log.e("TAG", "ScoreScreen")
     }
 
     override fun onCreateView(

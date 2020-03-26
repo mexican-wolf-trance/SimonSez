@@ -16,5 +16,6 @@
     <string name="congrats">See Scores</string>
     <string name="finish">FINISH</string>
     <string name="play_again">PLAY AGAIN</string>
+    <string name="quit">QUIT</string>
 
 </resources>

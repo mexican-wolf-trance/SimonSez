@@ -38,7 +38,7 @@ class GameScreenFragment: Fragment()
         super.onAttach(context)
         activity?.apply {
             model = ViewModelProvider(this).get(GameModel::class.java) }
-        Log.e("TAG", "Am I here? ${model.getDifficulty()}")
+        Log.e("TAG", "GameScreen")
     }
 
     override fun onCreateView(
@@ -76,7 +76,7 @@ class GameScreenFragment: Fragment()
         return thisView
     }
 
-    fun runUIUpdate()
+    fun gameTime()
     {
         val sequence = model.getSequence()
         activity?.let {activity ->
@@ -111,12 +111,7 @@ class GameScreenFragment: Fragment()
                 }
             }
             sequence?.add((0..3).shuffled().first())
-            Log.e("TAG", "Sequence is $sequence")
-            if (sequence != null)
-            {
-                model.setSequence(sequence)
-
-            }
+            if (sequence != null) { model.setSequence(sequence) }
         }
     }
 }

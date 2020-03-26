@@ -3,14 +3,7 @@ package edu.charles_wyatt.simonsez
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
-import androidx.core.view.setMargins
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.scores_screen_fragment.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.game_screen_fragment.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -128,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             override fun sequenceTriggered()
             {
                 Log.e("TAG", "Sequence triggerrrrrrrred")
-                gameFragment?.runUIUpdate()
+                gameFragment?.gameTime()
             }
         }
     }

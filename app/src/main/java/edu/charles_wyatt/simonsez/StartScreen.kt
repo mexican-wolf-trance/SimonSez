@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.start_screen.*
+import kotlinx.android.synthetic.main.start_screen.view.*
 
 
 class StartScreen : AppCompatActivity()
@@ -52,12 +53,13 @@ class StartScreen : AppCompatActivity()
         backButton.layoutParams = backParams
         backButton.textSize = 30.0F
 
-        val playGame = findViewById<View>(R.id.play_button) as Button
         val topText = findViewById<TextView>(R.id.start_text)
 
         fun chooseDifficulty()
         {
-            playGame.visibility = View.GONE
+            play_button.visibility = View.GONE
+            quit.visibility = View.GONE
+
             topText.setText(R.string.set_diff)
 
             startScreen.addView(easyButton)
@@ -66,7 +68,7 @@ class StartScreen : AppCompatActivity()
             startScreen.addView(backButton)
         }
 
-        playGame.setOnClickListener()
+        play_button.setOnClickListener()
         {
             chooseDifficulty()
         }
@@ -94,9 +96,14 @@ class StartScreen : AppCompatActivity()
             startScreen.removeView(hardButton)
             startScreen.removeView(backButton)
 
-            playGame.visibility = View.VISIBLE
+            play_button.visibility = View.VISIBLE
+            quit.visibility = View.VISIBLE
 
             topText.setText(R.string.welcome)
+        }
+        quit.setOnClickListener()
+        {
+            finish()
         }
     }
 }
