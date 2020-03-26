@@ -1,12 +1,19 @@
 package edu.charles_wyatt.simonsez
 
+import android.content.Context
 import android.os.Handler
 import android.util.Log
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.lifecycle.ViewModel
+import kotlinx.android.synthetic.main.game_screen_fragment.view.*
 import kotlin.random.Random
 
 class GameModel: ViewModel()
 {
+
     var listener: Listener? = null
     interface Listener
     {
@@ -81,5 +88,4 @@ class GameModel: ViewModel()
     {
         return gameSequence as MutableList<Int>
     }
-
 }

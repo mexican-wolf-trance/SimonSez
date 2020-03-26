@@ -76,5 +76,27 @@
         android:text="@string/finish"
         android:textAlignment="center"
         android:gravity="center_horizontal" />
+    <Button
+        android:id="@+id/go_to_the_scores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seeScores"
+        android:textSize="30sp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="310dp"
+        android:visibility="invisible"
+        />
+    <Button
+        android:id="@+id/back_to_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/play_again"
+        android:textSize="30sp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="253dp"
+        android:visibility="invisible"
+        />
 
 </RelativeLayout>

@@ -2,7 +2,7 @@
     <string name="app_name">SimonSez</string>
     <string name="playButton">PLAY GAME!</string>
     <string name="welcome">Welcome to the Simon Sez Game!</string>
-    <string name="seeScores">See Scores</string>
+    <string name="seeScores">TOP 10</string>
     <string name="set_diff">CHOOSE YOUR DIFFICULTY</string>
     <string name="hard">HARD</string>
     <string name="medium">MEDIUM</string>

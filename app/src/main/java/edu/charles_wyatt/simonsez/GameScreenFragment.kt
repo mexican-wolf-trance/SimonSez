@@ -29,6 +29,8 @@ class GameScreenFragment: Fragment()
         fun greenButtonPressed()
         fun blueButtonPressed()
         fun yellowButtonPressed()
+        fun scoresButtonPressed()
+        fun backToStartPressed()
 
     }
     var listener: StateListener? = null
@@ -72,8 +74,21 @@ class GameScreenFragment: Fragment()
         {
             listener?.yellowButtonPressed()
         }
-
         return thisView
+    }
+
+    fun getButtons()
+    {
+        go_to_the_scores.visibility = View.VISIBLE
+        back_to_start.visibility = View.VISIBLE
+        go_to_the_scores.setOnClickListener()
+        {
+            listener?.scoresButtonPressed()
+        }
+        back_to_start.setOnClickListener()
+        {
+            listener?.backToStartPressed()
+        }
     }
 
     fun gameTime()

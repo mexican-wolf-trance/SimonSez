@@ -1,9 +1,16 @@
 package edu.charles_wyatt.simonsez
 
+import android.app.PendingIntent.getActivity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.game_screen_fragment.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,47 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         model = ViewModelProvider(this).get(GameModel::class.java)
         model.setDifficulty(intent.getStringExtra("diff"))
-
-//        val view = findViewById<RelativeLayout>(R.id.activity_main)
-//        val finishButton = findViewById<TextView>(R.id.finish)
-//        val redButton = findViewById<TextView>(R.id.red)
-//        val greenButton = findViewById<TextView>(R.id.green)
-//        val blueButton = findViewById<TextView>(R.id.blue)
-//        val yellowButton = findViewById<TextView>(R.id.yellow)
-//
-//        fun backToStart()
-//        {
-//            finish()
-//        }
-//        fun onFinish()
-//        {
-//            gameStart.isEnabled = false
-//            finishButton.isEnabled = false
-//            redButton.isEnabled = false
-//            greenButton.isEnabled = false
-//            blueButton.isEnabled = false
-//            yellowButton.isEnabled = false
-//
-//            val seeScoresButtonParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-//            seeScoresButtonParams.setMargins(200, 600, 200, 0)
-//            val playAgainButtonParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-//            playAgainButtonParams.setMargins(200, 400, 200, 0)
-//
-//            val seeScoresButton = Button(this)
-//            val playAgainButton = Button(this)
-//
-//            seeScoresButton.setText(R.string.congrats)
-//            seeScoresButton.textSize = 30.0F
-//            seeScoresButton.layoutParams = seeScoresButtonParams
-//
-//            playAgainButton.setText(R.string.play_again)
-//            playAgainButton.textSize = 30.0F
-//            playAgainButton.layoutParams = playAgainButtonParams
-//
-//            view.addView(seeScoresButton)
-//            view.addView(playAgainButton)
-//
-//            seeScoresButton.setOnClickListener()
 
         gameFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? GameScreenFragment
         if (gameFragment == null)
@@ -78,14 +44,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun finishButtonPressed()
             {
-                scoreFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? ScoresScreen
-                if (scoreFragment == null)
-                {
-                    scoreFragment = ScoresScreen()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.activity_main, scoreFragment!!)
-                        .commit()
-                }
+                gameFragment?.getButtons()
             }
 
             override fun redButtonPressed()
@@ -107,15 +66,25 @@ class MainActivity : AppCompatActivity() {
             {
                 Log.e("Tag", "Yellow Button Pressed")
             }
-        }
-        scoreFragment?.listener = object: ScoresScreen.StateListener
-        {
-            override fun backToStart()
+
+            override fun scoresButtonPressed()
+            {
+                scoreFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? ScoresScreen
+                if (scoreFragment == null)
+                {
+                    scoreFragment = ScoresScreen()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.activity_main, scoreFragment!!)
+                        .commit()
+                }
+            }
+
+            override fun backToStartPressed()
             {
                 finish()
-                Log.e("TAG", "Supposed to finish this activity")
             }
         }
+
         model.listener = object: GameModel.Listener
         {
             override fun sequenceTriggered()
