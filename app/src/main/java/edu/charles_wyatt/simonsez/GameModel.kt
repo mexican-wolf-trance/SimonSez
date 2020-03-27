@@ -13,6 +13,7 @@ class GameModel: ViewModel()
     {
         fun sequenceTriggered()
         fun theGameIsOver()
+        fun goToNextRound()
     }
 
 
@@ -96,6 +97,8 @@ class GameModel: ViewModel()
             {
                 this.playerSequence?.add(x)
                 this.index++
+                if (this.index == (this.gameSequence?.size!!)-1)
+                { nextRound() }
             }
             else { endGame() }
         }
@@ -107,5 +110,9 @@ class GameModel: ViewModel()
     private fun endGame()
     {
         listener?.theGameIsOver()
+    }
+    private fun nextRound()
+    {
+        listener?.goToNextRound()
     }
 }

@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity()
+{
     private lateinit var model: GameModel
     private var scoreFragment: ScoresScreen? = null
     private var gameFragment: GameScreenFragment? = null
@@ -82,8 +82,14 @@ class MainActivity : AppCompatActivity() {
                 if (sequence != null) { model.setSequence(sequence) }
             }
 
+            override fun goToNextRound()
+            {
+                model.startGame()
+            }
+
             override fun theGameIsOver()
             { gameFragment?.getButtons() }
+
         }
     }
 }
