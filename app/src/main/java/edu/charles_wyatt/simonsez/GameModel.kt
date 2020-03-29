@@ -31,7 +31,7 @@ class GameModel: ViewModel()
     private var playerSequence: MutableList<Int>? = arrayListOf()
     private var diff: String = ""
     private var score: Int = 0
-    var theScores: Scores = Scores("", 0, 0)
+    var theScores: Scores = Scores("Tom", 0, 0)
     lateinit var scoreList: MutableList<Scores>
     private var handler: Handler? = null
     private var index = 0
@@ -73,10 +73,11 @@ class GameModel: ViewModel()
     }
     fun setID()
     {
-        this.playerId += 1
+        this.theScores.id += 1
     }
     fun getID(): Int
     {
+        this.playerId = this.theScores.id
         return this.playerId
     }
     fun setDifficulty(x: String?)
@@ -139,5 +140,16 @@ class GameModel: ViewModel()
     private fun saveScoresToJSON()
     {
         listener?.saveScores()
+    }
+    fun generateList()
+    {
+        this.scoreList = mutableListOf(Scores("Tom", 0, 0))
+        for (item in 1 until 10)
+        {
+            this.scoreList.add(Scores("Tom", 0, item))
+        }
+        val gsonPretty = GsonBuilder().setPrettyPrinting().create()
+        val jsonScoresPretty = gsonPretty.toJson(this.scoreList)
+        Log.e("TAG", "ScoreList: $jsonScoresPretty")
     }
 }

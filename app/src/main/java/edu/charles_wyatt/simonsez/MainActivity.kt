@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 
 
 class MainActivity : AppCompatActivity()
@@ -106,8 +107,12 @@ class MainActivity : AppCompatActivity()
                 val gsonFirstPretty = GsonBuilder().setPrettyPrinting().create()
                 val json = sharedPref.getString("Scores", "")
                 Log.e("TAG", "In the Score Fragment, Scores: $json")
-                val obj = gsonFirstPretty.fromJson(json, Scores::class.java)
-                Log.e("TAG", "Did it work?, Scores: ${obj.score}")
+                if (json != null) { if(json.isEmpty()) { model.generateList() } }
+                var obj = object : TypeToken<List<Scores>>() {}.type
+                obj = gsonFirstPretty.fromJson(json, Scores::class.java)
+                Log.e("TAG", "Did it work?, Obj: $obj")
+                model.scoreList = mutableListOf(obj)
+                Log.e("TAG", "Did it work?, ScoreList: ${model.scoreList}")
 
                 model.setID()
                 model.theScores = Scores("Tom", model.getScore(), model.getID())
