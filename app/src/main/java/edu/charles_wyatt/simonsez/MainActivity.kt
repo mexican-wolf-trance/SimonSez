@@ -104,14 +104,14 @@ class MainActivity : AppCompatActivity()
             {
                 Log.e("TAG", "What about showJSONScores?")
                 val gsonFirstPretty = GsonBuilder().setPrettyPrinting().create()
-                val json = sharedPref.getString("MyObject", "")
+                val json = sharedPref.getString("Scores", "")
                 Log.e("TAG", "In the Score Fragment, Scores: $json")
                 val obj = gsonFirstPretty.fromJson(json, Scores::class.java)
-                Log.e("TAG", "Did it work?, Scores: $obj")
+                Log.e("TAG", "Did it work?, Scores: ${obj.score}")
 
                 model.setID()
                 model.theScores = Scores("Tom", model.getScore(), model.getID())
-                Log.e("TAG", "ScoreList: Name: ${model.theScores.name} and Score: ${model.theScores.score} and PlayerID: ${model.getID()}")
+//                Log.e("TAG", "ScoreList: Name: ${model.theScores.name} and Score: ${model.theScores.score} and PlayerID: ${model.getID()}")
 
                 val prefsEditor: Editor = sharedPref.edit()
                 val gsonPretty = GsonBuilder().setPrettyPrinting().create()
