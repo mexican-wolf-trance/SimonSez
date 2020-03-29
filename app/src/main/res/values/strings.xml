@@ -18,5 +18,6 @@
     <string name="play_again">PLAY AGAIN</string>
     <string name="quit">QUIT</string>
     <string name="top10">TOP 10</string>
+    <string name="preference_file_key">SimonSezGameKey</string>
 
 </resources>

@@ -4,6 +4,13 @@ import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlin.random.Random
+import java.io.File
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import java.io.IOException
+import android.content.Context
+import android.view.View
+import java.security.AccessController.getContext
 
 class GameModel: ViewModel()
 {
@@ -14,6 +21,7 @@ class GameModel: ViewModel()
         fun sequenceTriggered()
         fun theGameIsOver()
         fun goToNextRound()
+        fun saveScores()
     }
 
 
@@ -23,8 +31,11 @@ class GameModel: ViewModel()
     private var playerSequence: MutableList<Int>? = arrayListOf()
     private var diff: String = ""
     private var score: Int = 0
+    var theScores: Scores = Scores("", 0, 0)
+    lateinit var scoreList: MutableList<Scores>
     private var handler: Handler? = null
     private var index = 0
+    private var playerId = 0
 
     var isRunning = false
     private set
@@ -52,18 +63,21 @@ class GameModel: ViewModel()
         handler = null
     }
 
-    private fun triggerSequence()
+    private fun setScore(x: Int)
     {
-        handler?.postDelayed(runnable, 1200)
-    }
-
-    fun setScore(x: Int)
-    {
-        this.score = x
+        this.score += x
     }
     fun getScore(): Int
     {
         return this.score
+    }
+    fun setID()
+    {
+        this.playerId += 1
+    }
+    fun getID(): Int
+    {
+        return this.playerId
     }
     fun setDifficulty(x: String?)
     {
@@ -98,9 +112,16 @@ class GameModel: ViewModel()
                 this.playerSequence?.add(x)
                 this.index++
                 if (this.index == (this.gameSequence?.size!!)-1)
-                { nextRound() }
+                {
+                    setScore(1)
+                    nextRound()
+                }
             }
-            else { endGame() }
+            else
+            {
+                saveScoresToJSON()
+                endGame()
+            }
         }
     }
     fun getPlayerSequence(): MutableList<Int>?
@@ -114,5 +135,9 @@ class GameModel: ViewModel()
     private fun nextRound()
     {
         listener?.goToNextRound()
+    }
+    private fun saveScoresToJSON()
+    {
+        listener?.saveScores()
     }
 }

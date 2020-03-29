@@ -120,9 +120,33 @@ class GameScreenFragment: Fragment()
                     view.setBackgroundColor((animatedValue))
                 }
             }
-            animator?.startDelay = (count * 1000).toLong()
-            animator?.duration = 1000
-            animator?.start()
+            when (model.getDifficulty())
+            {
+                "EASY" ->
+                {
+                    animator?.startDelay = (count * 1000).toLong()
+                    animator?.duration = 1000
+                    animator?.start()
+                }
+                "NORMAL" ->
+                {
+                    animator?.startDelay = (count * 900).toLong()
+                    animator?.duration = 900
+                    animator?.start()
+                }
+                "HARD" ->
+                {
+                    animator?.startDelay = (count * 800).toLong()
+                    animator?.duration = 800
+                    animator?.start()
+                }
+                else ->
+                {
+                    animator?.startDelay = (count * 1000).toLong()
+                    animator?.duration = 1000
+                    animator?.start()
+                }
+            }
         }
     }
 }

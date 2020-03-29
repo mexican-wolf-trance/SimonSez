@@ -1,8 +1,14 @@
 package edu.charles_wyatt.simonsez
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.GsonBuilder
+
 
 class MainActivity : AppCompatActivity()
 {
@@ -16,6 +22,8 @@ class MainActivity : AppCompatActivity()
 
         model = ViewModelProvider(this).get(GameModel::class.java)
         model.setDifficulty(intent.getStringExtra("diff"))
+
+        val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE )
 
         gameFragment = supportFragmentManager.findFragmentById(R.id.activity_main) as? GameScreenFragment
         if (gameFragment == null)
@@ -88,8 +96,43 @@ class MainActivity : AppCompatActivity()
             }
 
             override fun theGameIsOver()
-            { gameFragment?.getButtons() }
+            {
+                gameFragment?.getButtons()
+            }
 
+            override fun saveScores()
+            {
+                Log.e("TAG", "What about showJSONScores?")
+                val gsonFirstPretty = GsonBuilder().setPrettyPrinting().create()
+                val json = sharedPref.getString("MyObject", "")
+                Log.e("TAG", "In the Score Fragment, Scores: $json")
+                val obj = gsonFirstPretty.fromJson(json, Scores::class.java)
+                Log.e("TAG", "Did it work?, Scores: $obj")
+
+                model.setID()
+                model.theScores = Scores("Tom", model.getScore(), model.getID())
+                Log.e("TAG", "ScoreList: Name: ${model.theScores.name} and Score: ${model.theScores.score} and PlayerID: ${model.getID()}")
+
+                val prefsEditor: Editor = sharedPref.edit()
+                val gsonPretty = GsonBuilder().setPrettyPrinting().create()
+                val jsonScoresPretty = gsonPretty.toJson(model.theScores)
+                Log.e("TAG", "JSON: $jsonScoresPretty")
+                prefsEditor.putString("Scores", jsonScoresPretty);
+                prefsEditor.apply();
+
+            }
+
+        }
+        scoreFragment?.listener = object: ScoresScreen.StateListener
+        {
+            override fun showJSONScores()
+            {
+                Log.e("TAG", "What about showJSONScores?")
+                val gsonPretty = GsonBuilder().setPrettyPrinting().create()
+                val json = sharedPref.getString("MyObject", "")
+                Log.e("TAG", "In the Score Fragment, Scores: $json")
+                model.theScores = gsonPretty.fromJson(json, Scores::class.java)
+            }
         }
     }
 }

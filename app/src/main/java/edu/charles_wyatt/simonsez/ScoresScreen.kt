@@ -16,7 +16,8 @@ class ScoresScreen : Fragment()
 
     interface StateListener
     {
-            fun backToStart()
+//        fun putUpTheScore()
+        fun showJSONScores()
     }
     var listener: StateListener? = null
 
@@ -25,6 +26,9 @@ class ScoresScreen : Fragment()
     { super.onAttach(context)
         activity?.apply {
             model = ViewModelProvider(this).get(GameModel::class.java) }
+
+        showScores()
+        Log.e("TAG", "Should have done showScores: ${model.theScores.name}, ${model.theScores.id}, ${model.theScores.score }")
     }
 
     override fun onCreateView(
@@ -37,6 +41,13 @@ class ScoresScreen : Fragment()
         {
             activity?.finish()
         }
+        showScores()
+        Log.e("TAG", "Should have done showScores")
         return view
+    }
+    fun showScores()
+    {
+        Log.e("TAG", "Did I get in the showScores at least?")
+        listener?.showJSONScores()
     }
 }
