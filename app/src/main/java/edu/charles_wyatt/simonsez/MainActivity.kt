@@ -140,13 +140,13 @@ class MainActivity : AppCompatActivity()
                 model.scoreList = obj
                 Log.e("TAG", "Did it work?, ScoreList: ${model.scoreList.elementAt(0)}")
 
+                var listOfScores: Array<Int>
                 model.scoreList.forEachIndexed { item, Scores ->
                     Log.i("DATA", "Score id: ${Scores.id}, name: ${Scores.name}, score: ${Scores.score}")
-                    if (Scores.score < model.getScore())
-                    {
-                        Scores.score = model.getScore()
-                    }
+                    listOfScores = arrayOf(Scores.score)
+                    Log.i("DATA", "List of scores: $listOfScores")
                 }
+
 
                 val prefsEditor: Editor = sharedPref.edit()
 //                val gsonPretty = GsonBuilder().setPrettyPrinting().create()
@@ -155,6 +155,8 @@ class MainActivity : AppCompatActivity()
                 Log.e("TAG", "JSON: $jsonScoresPretty")
                 prefsEditor.putString("Scores", jsonScoresPretty)
                 prefsEditor.apply()
+
+                model.setGameCheck()
 
             }
 

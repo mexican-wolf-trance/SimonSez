@@ -37,6 +37,7 @@ class GameModel: ViewModel()
     private var handler: Handler? = null
     private var index = 0
     private var playerId = 0
+    private var saveGameCheck = false
 
     var isRunning = false
     private set
@@ -56,7 +57,14 @@ class GameModel: ViewModel()
         listener?.sequenceTriggered()
         this.stopGame()
     }
-
+    fun setGameCheck()
+    {
+        this.saveGameCheck = true
+    }
+    fun getGameCheck(): Boolean
+    {
+        return this.saveGameCheck
+    }
     private fun stopGame()
     {
         handler?.removeCallbacks(runnable)
