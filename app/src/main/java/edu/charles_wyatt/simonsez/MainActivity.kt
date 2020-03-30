@@ -42,7 +42,11 @@ class MainActivity : AppCompatActivity()
             { model.startGame() }
 
             override fun finishButtonPressed()
-            { gameFragment?.getButtons() }
+            {
+                model.saveScoresToJSON()
+                gameFragment?.getButtons()
+
+            }
 
             override fun redButtonPressed()
             { model.setPlayerSequence(0) }
@@ -134,22 +138,41 @@ class MainActivity : AppCompatActivity()
                     }
                 }
 
-                var scoresType = object : TypeToken<MutableList<Scores>>() {}.type
-                var obj: MutableList<Scores> = gson.fromJson(json, scoresType)
+                val scoresType = object : TypeToken<MutableList<Scores>>() {}.type
+                val obj: MutableList<Scores> = gson.fromJson(json, scoresType)
                 obj.forEachIndexed { idx, scores -> Log.i("data", "> Item $idx:\n$scores") }
                 model.scoreList = obj
                 Log.e("TAG", "Did it work?, ScoreList: ${model.scoreList.elementAt(0)}")
-
-                var listOfScores: Array<Int>
-                model.scoreList.forEachIndexed { item, Scores ->
+                var temp = 0
+                var tempName = ""
+                var score = model.getScore()
+                model.scoreList.forEach { Scores ->
                     Log.i("DATA", "Score id: ${Scores.id}, name: ${Scores.name}, score: ${Scores.score}")
-                    listOfScores = arrayOf(Scores.score)
-                    Log.i("DATA", "List of scores: $listOfScores")
+//                    if (model.getScore() > Scores.score)
+//                    {
+//                        temp = Scores.score
+//                        Scores.score = model.getScore()
+//                    }
+//
+                }
+                for (item in 0 until 9)
+                {
+                    if (score > model.scoreList.elementAt(item).score)
+                    {
+                        temp = model.scoreList.elementAt(item).score
+
+                        model.scoreList.elementAt(item).name = "Tom"
+
+                        model.scoreList.elementAt(item).score = score
+
+                        score = temp
+
+                        break
+                    }
                 }
 
 
                 val prefsEditor: Editor = sharedPref.edit()
-//                val gsonPretty = GsonBuilder().setPrettyPrinting().create()
                 val gsonPretty = Gson()
                 val jsonScoresPretty = gsonPretty.toJson(model.scoreList)
                 Log.e("TAG", "JSON: $jsonScoresPretty")
@@ -160,17 +183,6 @@ class MainActivity : AppCompatActivity()
 
             }
 
-        }
-        scoreFragment?.listener = object: ScoresScreen.StateListener
-        {
-            override fun showJSONScores()
-            {
-                Log.e("TAG", "What about showJSONScores?")
-                val gsonPretty = GsonBuilder().setPrettyPrinting().create()
-                val json = sharedPref.getString("MyObject", "")
-                Log.e("TAG", "In the Score Fragment, Scores: $json")
-                model.theScores = gsonPretty.fromJson(json, Scores::class.java)
-            }
         }
     }
 }

@@ -146,7 +146,7 @@ class GameModel: ViewModel()
     {
         listener?.goToNextRound()
     }
-    private fun saveScoresToJSON()
+    fun saveScoresToJSON()
     {
         listener?.saveScores()
     }
