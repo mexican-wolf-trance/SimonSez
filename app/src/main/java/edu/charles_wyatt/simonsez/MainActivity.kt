@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 
@@ -101,29 +102,59 @@ class MainActivity : AppCompatActivity()
                 gameFragment?.getButtons()
             }
 
-            override fun saveScores()
+            override fun generateTheList()
             {
-                Log.e("TAG", "What about showJSONScores?")
-                val gsonFirstPretty = GsonBuilder().setPrettyPrinting().create()
-                val json = sharedPref.getString("Scores", "")
-                Log.e("TAG", "In the Score Fragment, Scores: $json")
-                if (json != null) { if(json.isEmpty()) { model.generateList() } }
-                var obj = object : TypeToken<List<Scores>>() {}.type
-                obj = gsonFirstPretty.fromJson(json, Scores::class.java)
-                Log.e("TAG", "Did it work?, Obj: $obj")
-                model.scoreList = mutableListOf(obj)
-                Log.e("TAG", "Did it work?, ScoreList: ${model.scoreList}")
-
-                model.setID()
-                model.theScores = Scores("Tom", model.getScore(), model.getID())
-//                Log.e("TAG", "ScoreList: Name: ${model.theScores.name} and Score: ${model.theScores.score} and PlayerID: ${model.getID()}")
+                model.scoreList = mutableListOf(Scores("Tom", 0, 0))
+                for (item in 1 until 10)
+                {
+                    model.scoreList.add(Scores("Tom", 0, item))
+                }
+//                val gsonPretty = GsonBuilder().setPrettyPrinting().create()
+                val gsonPretty = Gson()
+                val jsonScoresPretty = gsonPretty.toJson(model.scoreList)
+                Log.e("TAG", "ScoreList: $jsonScoresPretty")
 
                 val prefsEditor: Editor = sharedPref.edit()
-                val gsonPretty = GsonBuilder().setPrettyPrinting().create()
-                val jsonScoresPretty = gsonPretty.toJson(model.theScores)
-                Log.e("TAG", "JSON: $jsonScoresPretty")
                 prefsEditor.putString("Scores", jsonScoresPretty);
                 prefsEditor.apply();
+            }
+            override fun saveScores()
+            {
+//                getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE).edit().clear().apply()
+                Log.e("TAG", "What about showJSONScores?")
+                val gson = Gson()
+                var json = sharedPref.getString("Scores", "")
+                Log.e("TAG", "In the Score Fragment, Scores: $json")
+                if (json != null)
+                {
+                    if(json.isEmpty())
+                    {
+                        model.generateList()
+                        json = sharedPref.getString("Scores", "")
+                    }
+                }
+
+                var scoresType = object : TypeToken<MutableList<Scores>>() {}.type
+                var obj: MutableList<Scores> = gson.fromJson(json, scoresType)
+                obj.forEachIndexed { idx, scores -> Log.i("data", "> Item $idx:\n$scores") }
+                model.scoreList = obj
+                Log.e("TAG", "Did it work?, ScoreList: ${model.scoreList.elementAt(0)}")
+
+                model.scoreList.forEachIndexed { item, Scores ->
+                    Log.i("DATA", "Score id: ${Scores.id}, name: ${Scores.name}, score: ${Scores.score}")
+                    if (Scores.score < model.getScore())
+                    {
+                        Scores.score = model.getScore()
+                    }
+                }
+
+                val prefsEditor: Editor = sharedPref.edit()
+//                val gsonPretty = GsonBuilder().setPrettyPrinting().create()
+                val gsonPretty = Gson()
+                val jsonScoresPretty = gsonPretty.toJson(model.scoreList)
+                Log.e("TAG", "JSON: $jsonScoresPretty")
+                prefsEditor.putString("Scores", jsonScoresPretty)
+                prefsEditor.apply()
 
             }
 

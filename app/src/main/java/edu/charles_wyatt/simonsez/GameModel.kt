@@ -22,6 +22,7 @@ class GameModel: ViewModel()
         fun theGameIsOver()
         fun goToNextRound()
         fun saveScores()
+        fun generateTheList()
     }
 
 
@@ -143,13 +144,6 @@ class GameModel: ViewModel()
     }
     fun generateList()
     {
-        this.scoreList = mutableListOf(Scores("Tom", 0, 0))
-        for (item in 1 until 10)
-        {
-            this.scoreList.add(Scores("Tom", 0, item))
-        }
-        val gsonPretty = GsonBuilder().setPrettyPrinting().create()
-        val jsonScoresPretty = gsonPretty.toJson(this.scoreList)
-        Log.e("TAG", "ScoreList: $jsonScoresPretty")
+        listener?.generateTheList()
     }
 }
